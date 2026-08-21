@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container-fluid text-center">
+        <div class="row">
+            <div class="col bg-primary text-white p-3">
+                <h1>Formulario consumindo API ViaCep</h1>
+            </div>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6 border">
+                    <h2>Formulário</h2>
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="cep" for="floatingInput">CEP:</label>
+                            <input type="text" name="cep" class="form-control" maxlength="9" pattern="\d{5}-\d{3}"placeholder="00000-000" oninput="mascaraCEP(this)">
+                            <label for="rua" for="floatingInput">Rua:</label>
+                            <input type="text" name="rua" class="form-control" disabled>
+                            <label for="bairro" for="floatingInput">Bairro:</label>
+                            <input type="text" name="bairro" class="form-control">
+                            <label for="estado" for="floatingInput">Estado:</label>
+                            <input type="text" name="estado" class="form-control">
+                            <label for="uf" for="floatingInput">UF:</label>
+                            <input type="text" name="UF" class="form-control" maxlength="2">
+                            <label for="IBGN" for="floatingInput">IBGN:</label>
+                            <input type="number" name="IBGN" class="form-control">
+                        </div>
+                        <input type="submit" value="Enviar" class="btn btn-success">
+                    </form>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>function mascaraCEP(input) {
+            // Remove tudo o que não for número
+            let valor = input.value.replace(/\D/g, "");
+
+            // Aplica a máscara se houver mais de 5 dígitos
+            if (valor.length > 5) {
+                valor = valor.replace(/^(\d{5})(\d)/, "$1-$2");
+            }
+
+            // Atualiza o valor do campo
+            input.value = valor;
+        }</script>
+</body>
+
+</html>
