@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Exercícios de Eventos</title>
+  <style type="text/css" media="all">
+    div {
+      transition: all linear 1s;
+      max-height: 100px;
+      background-color: white;
+      overflow: hidden;
+    }
+
+    .escondido {
+      max-height: 0;
+    }
+
+    section {
+      padding: 10px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+    }
+
+    section p span {
+      font-weight: bold;
+    }
+
+    section hr {
+      margin: 10px auto;
+      width: 98%;
+    }
+
+    section .cursor {
+      position: absolute;
+      height: 30px;
+      width: 30px;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Exercícios de Eventos</h1>
+    <p>Podem alterar a estrutura do HTML para ficar mais fácil de selecionar os elementos.</p>
+  </header>
+
+  <section>
+    <h2>Evento click</h2>
+    <p><span>Exercício 1:</span> Alterar a cor do div apresentado a seguir, quando o próximo botão "click1" for
+      pressionado.</p>
+    <button>click1</button>
+    <div>COR?</div>
+    <hr />
+
+    <p><span>Exercício 2:</span> Apresentar/esconder o div apresentado a seguir, conforme o usuário pressionar o botão
+      "click2".</p>
+    <button>click2</button>
+    <div class="escondido" style="background-color: yellow; height: 50px;">Conteúdo secreto, escondido</div>
+    <hr />
+
+    <p><span>Exercício 3:</span> Mover o div apresentado a seguir para a direita/esquerda, toda vez que o botão "click3"
+      for clicado (utilizar o style.transform).</p>
+    <button>click3</button>
+    <div style="height: 50px; width: 50px; background-color: red; transform: translateX(0);"></div>
+    <hr />
+
+    <p><span>Exercício 4:</span> Alterar o conteúdo textual e apresentação do botão "click4", toda vez que ele for
+      clicado.</p>
+    <button>click4</button>
+    <hr />
+
+    <p><span>Exercício 5:</span> Acrescentar um elemento li com o texto "qualquer ítem" no elemento ul a seguir, toda
+      vez que o botão "click5" for pressionado.</p>
+    <button>click5</button>
+    <ul></ul>
+    <hr />
+
+    <p><span>Exercício 6</span>: Acrescentar um elemento li com o texto "item X" no elemento ul a seguir (sendo X, o
+      índice do elemento no ul), toda vez que o botão "click6" for pressionado.</p>
+    <button>click6</button>
+    <ul></ul>
+  </section>
+
+  <section>
+    <h2>Eventos de teclado e o elemento input</h2>
+    <p><span>Exercício 7:</span> Apresentar o conteúdo do input a seguir (utilizando um alert), toda vez que o botão
+      "click7" for pressionado.</p>
+    <fieldset>
+      <legend>Exercício 7</legend>
+      <input type="text" value="" />
+      <button>click7</button>
+    </fieldset>
+
+    <p><span>Exercício 8:</span> Inserir o conteúdo do input a seguir em um elemento li e depois acrescenta-lo no
+      elemento ul apresentado a seguir, toda vez que o botão "click8" for pressionado.</p>
+    <fieldset>
+      <legend>Exercício 8</legend>
+      <input type="text" value="" />
+      <button>click8</button>
+      <ul></ul>
+    </fieldset>
+
+    <p><span>Exercício 9:</span> Inserir o conteúdo do input a seguir dentro do elemento div a seguir, toda vez que o
+      conteúdo do input for alterado (utilizar o evento change/keyup).</p>
+    <fieldset>
+      <legend>Exercício 9</legend>
+      <div>
+        <input type="text" value="" />
+        <div style="height: 25px; width: 50%; background-color: cyan"></div>
+      </div>
+    </fieldset>
+
+    <p><span>Exercício 10:</span> Capturar quando as teclas de seta para baixo/cima/esquerda/direita foram pressionadas,
+      e alterar o posicionamento do div de classe cursor (utilizar o parâmetro evento e o atributo keyCode). É possível
+      fazer sem o input? (Dica: evento focus, tabindex)</p>
+    <fieldset>
+      <legend>Exercício 10</legend>
+      <input type="text" value="" />
+      <div style="position: relative; border: 1px solid black; margin: 10px; height: 100px;">
+        <div class="cursor" style="top: 40px; left: 45%"></div>
+      </div>
+    </fieldset>
+
+  </section>
+
+  <script>
+  // Exercício 1: Alterar cor do div
+  const btn1 = document.querySelectorAll('button')[0];
+  const div1 = btn1.nextElementSibling;
+  btn1.addEventListener('click', () => {
+    div1.style.backgroundColor = div1.style.backgroundColor === 'red' ? 'white' : 'red';
+  });
+
+  // Exercício 2: Apresentar/esconder o div
+  const btn2 = document.querySelectorAll('button')[1];
+  const div2 = btn2.nextElementSibling;
+  btn2.addEventListener('click', () => {
+    div2.classList.toggle('escondido');
+  });
+
+  // Exercício 3: Mover o div para direita/esquerda
+  const btn3 = document.querySelectorAll('button')[2];
+  const div3 = btn3.nextElementSibling;
+  let moved = false;
+  btn3.addEventListener('click', () => {
+    moved = !moved;
+    div3.style.transform = moved ? 'translateX(100px)' : 'translateX(0)';
+  });
+
+  // Exercício 4: Alterar conteúdo textual e estilo do botão
+  const btn4 = document.querySelectorAll('button')[3];
+  btn4.addEventListener('click', () => {
+    btn4.textContent = btn4.textContent === 'Ativo!' ? 'click4' : 'Ativo!';
+    btn4.style.backgroundColor = btn4.style.backgroundColor === 'green' ? '' : 'green';
+    btn4.style.color = btn4.style.color === 'white' ? '' : 'white';
+  });
+
+  // Exercício 5: Adicionar 'qualquer ítem' à lista
+  const btn5 = document.querySelectorAll('button')[4];
+  const ul5 = btn5.nextElementSibling;
+  btn5.addEventListener('click', () => {
+    const li = document.createElement('li');
+    li.textContent = 'qualquer ítem';
+    ul5.appendChild(li);
+  });
+
+  // Exercício 6: Adicionar 'item X' com índice
+  const btn6 = document.querySelectorAll('button')[5];
+  const ul6 = btn6.nextElementSibling;
+  btn6.addEventListener('click', () => {
+    const index = ul6.children.length;
+    const li = document.createElement('li');
+    li.textContent = `item ${index}`;
+    ul6.appendChild(li);
+  });
+
+  // Exercício 7: Alert com conteúdo do input
+  const fieldset7 = document.querySelectorAll('fieldset')[0];
+  const input7 = fieldset7.querySelector('input');
+  const btn7 = fieldset7.querySelector('button');
+  btn7.addEventListener('click', () => {
+    alert(input7.value);
+  });
+
+  // Exercício 8: Inserir conteúdo do input em li na ul
+  const fieldset8 = document.querySelectorAll('fieldset')[1];
+  const input8 = fieldset8.querySelector('input');
+  const btn8 = fieldset8.querySelector('button');
+  const ul8 = fieldset8.querySelector('ul');
+  btn8.addEventListener('click', () => {
+    if (input8.value.trim() !== '') {
+      const li = document.createElement('li');
+      li.textContent = input8.value;
+      ul8.appendChild(li);
+      input8.value = '';
+    }
+  });
+
+  // Exercício 9: Copiar conteúdo do input em tempo real para a div
+  const fieldset9 = document.querySelectorAll('fieldset')[2];
+  const input9 = fieldset9.querySelector('input');
+  const div9 = fieldset9.querySelector('div div');
+  input9.addEventListener('keyup', () => {
+    div9.textContent = input9.value;
+  });
+
+  // Exercício 10: Mover o cursor vermelho com as setas do teclado
+  const fieldset10 = document.querySelectorAll('fieldset')[3];
+  const input10 = fieldset10.querySelector('input');
+  const cursor = fieldset10.querySelector('.cursor');
+  
+  let topPos = 40;
+  let leftPos = 45;
+
+  input10.addEventListener('keydown', (e) => {
+    const step = 5;
+    // event.key é a alternativa moderna recomendada para o keyCode
+    if (e.key === 'ArrowUp' || e.keyCode === 38) topPos -= step;
+    if (e.key === 'ArrowDown' || e.keyCode === 40) topPos += step;
+    if (e.key === 'ArrowLeft' || e.keyCode === 37) leftPos -= step;
+    if (e.key === 'ArrowRight' || e.keyCode === 39) leftPos += step;
+
+    cursor.style.top = `${topPos}px`;
+    cursor.style.left = `${leftPos}%`;
+  });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+Considerando o código HTML apresentado a seguir, implemente códigos JavaScript que implementem as seguintes
+funcionalidades:
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Exercício com DOM-HTML</title>
+  <style type="text/css" media="all">
+    .invisivel {
+      opacity: 0;
+      transform: scale(0.1);
+      max-height: 0;
+    }
+
+    .animada {
+      transition: all linear 3s;
+      opacity: 1;
+      transform: scale(2);
+      max-height: 100px;
+    }
+
+    .ch {
+      background-color: cyan;
+      transform: scale(2);
+    }
+
+    .mascara {
+      overflow: hidden;
+      width: 387px;
+      height: 60px;
+      position: relative;
+    }
+
+    .mascara .atrapalhando {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-color: red;
+    }
+
+    .mascara .utfpr {
+      height: 60px;
+      width: 3000px;
+      background-image: url(http://portal.utfpr.edu.br/++theme++utfpr_branco/img/logo.png);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Exercício com DOM-HTML</h1>
+  <p>Faz <span class="dias"></span> que estamos estudando JavaScript.</p>
+
+  <p class="invisivel">Essa é uma mensagem escondida na página web.</p>
+  <p class="animada invisivel">Essa é uma mensagem animada na página web.</p>
+
+  <h2>Disciplinas por período</h2>
+  <ul>
+    <li>ALGORITMOS - PERÍODO 1 - (90h)</li>
+    <li>INTRODUÇÃO A SISTEMAS OPERACIONAIS - PERÍODO 1 - (30h)</li>
+    <li>PROGRAMAÇÃO ORIENTADA A OBJETOS - PERÍODO 2 - (90h)</li>
+    <li>PROGRAMAÇÃO WEB FRONT-END - PERÍODO 2 - (60h)</li>
+    <li>BANCO DE DADOS - PERÍODO 2 - (60h)</li>
+    <li>PROGRAMAÇÃO WEB BACK-END - PERÍODO 3 - (60h)</li>
+    <li>ESTRUTURA DE DADOS - PERÍODO 3 - (60h)</li>
+    <li>PROGRAMAÇÃO WEB FULLSTACK - PERÍODO 4 - (60h)</li>
+    <li>ESTRATÉGIAS DE PROGRAMAÇÃO - PERÍODO 4 - (60h)</li>
+  </ul>
+
+  <p class="ch_total">Carga-horária total: </p>
+
+  <div class="mascara">
+    <div class="atrapalhando"></div>
+    <div class="utfpr"></div>
+  </div>
+
+  <h2>Disciplinas em ordem alfabética</h2>
+  <ul class="ordenado">
+  </ul>
+
+  <h2>Disciplinas em ordem alfabética descrescente</h2>
+  <ul class="decrescente">
+  </ul>
+
+  <h2>Disciplinas de programação</h2>
+  <ul class="programacao"></ul>
+
+  <script>
+    // 1 Exercicio
+    const tituloAB = document.querySelector("title");
+    tituloAB.innerHTML += " e JavaScript";
+
+    const TituloPP = document.querySelector("h1");
+    TituloPP.innerHTML += " e JavaScript";
+
+    // 2 Exercicio
+    const hoje = new Date();
+    const inicioAulas = new Date(2024, 4, 1); //
+    const diferencaTempo = hoje - inicioAulas;
+    const diasAulas = Math.floor(diferencaTempo / (1000 * 60 * 60 * 24));
+    const spanDias = document.querySelector(".dias");
+    spanDias.innerHTML = diasAulas;
+
+    // 3  Exercicio
+    spanDias.style.backgroundColor = "red";
+
+    // 4 Exercicio
+    const elementosInvisiveis = document.querySelectorAll('.invisivel')
+    elementosInvisiveis.forEach(element => {
+      element.classList.remove('invisivel');
+    });
+
+    // 5 Exercicio
+    const elementosMinusculos = document.querySelectorAll('li')
+    elementosMinusculos.forEach(element => {
+      element.textContent = element.textContent.toLowerCase();
+    })
+
+    // 6 Exercicio
+    const elementosWeb = document.querySelectorAll('li')
+    elementosWeb.forEach(element => {
+      if (element.textContent.includes("web")) {
+        element.textContent += " (Facil)";
+      }
+
+      if (element.textContent.includes("período 1")) {
+        element.style.backgroundColor = "cyan";
+      }
+      if (element.textContent.includes("período 2")) {
+        element.style.backgroundColor = "yellow";
+      }
+      if (element.textContent.includes("período 3")) {
+        element.style.backgroundColor = "red";
+      }
+      if (element.textContent.includes("período 4")) {
+        element.style.backgroundColor = "green";
+      }
+
+    });
+
+    // 7 Exercicio
+    let somaTotal = 0;
+    const diasSemana = document.querySelectorAll('li');
+    diasSemana.forEach(element => {
+      const texto = element.textContent;
+      const posicaoIn = texto.indexOf('(') + 1; // Pegar logo depois do (
+      const posicaoFm = texto.indexOf('h)'); // Pegar logo antes do h)
+
+      // Recortar o numero entre as strings
+      const horasTexto = texto.substring(posicaoIn, posicaoFm);
+
+      const horas = parseInt(horasTexto);
+      somaTotal += horas; //Auxiliar para o oitavo exercicio
+
+      if (!isNaN(horas)) { /// Verifica se horas não é NaN
+        somaTotal += horas;
+      }
+
+      const aulasPSemana = horas / 15;
+
+      element.textContent += ` - (${aulasPSemana} aulas/semana)`;
+
+    });
+
+    // 8 Exercicio
+    const cargaHoraria = document.querySelectorAll('li');
+    const spanCH = document.createElement('span');
+    spanCH.classList.add('ch');
+    spanCH.textContent = somaTotal + "h";
+
+    const pTotal = document.querySelector('.ch_total');
+    pTotal.appendChild(spanCH);
+
+    // 9 Exercicio
+    document.querySelector('.atrapalhando').remove();
+
+    // 10 Exercicio
+    const vDisciplinas = [];
+
+    const lisOriginais = document.querySelectorAll('li');
+
+    lisOriginais.forEach(element => {
+      vDisciplinas.push(element.textContent);
+    });
+
+    vDisciplinas.sort();
+
+    const ulOrdenados = document.querySelector('.ordenado');
+    vDisciplinas.forEach(element => {
+      const novoLi = document.createElement('li');
+      novoLi.textContent = element;
+      ulOrdenados.appendChild(novoLi);
+    });
+
+    // 11 Exercicio
+    const reverse = document.querySelector('.decrescente');
+    vDisciplinas.reverse();
+    vDisciplinas.forEach(element => {
+
+      const reverseLi = document.createElement('li');
+      reverseLi.textContent = element;
+      reverse.appendChild(reverseLi);
+    });
+
+    // 12 Exercicio
+    const programa = document.querySelector('.programacao');
+
+    vDisciplinas.forEach(element => {
+      if(element.toLowerCase().includes('programacao') || element.toLowerCase().includes('programação')){
+        const disProgamacao = document.createElement('li');
+        disProgamacao.textContent = element;
+        programa.appendChild(disProgamacao);
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>
