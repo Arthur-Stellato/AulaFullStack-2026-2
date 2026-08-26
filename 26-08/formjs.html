@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario + Select</title>
+</head>
+<body>
+    <h1>Ações de formulários com JavaScript</h1>
+    <p>Genero:</p>
+    <input type="radio" name="gender" value="Masculino">Masculino
+    <input type="radio" name="gender" value="Feminino">Feminino
+    <input type="radio" name="gender" value="Outros">Outros
+    <p></p>
+    <button type="button" onclick="displayRadioValue()">Enviar</button>
+
+    <div id="result"></div>
+
+        <h2>Qual o elemento da lista foi selecionado?</h2>
+        <p>Selecione uma das opções de plano</p>
+        <select id="select1">[
+            <option value="free">Free</option>
+            <option value="basic">Based</option>
+            <option value="premium">Premium</option>
+        </select>
+
+        <p>O plano selecionado é: <span class="output">??</span></p>
+        <button onclick="getOption()">Veja o texto da seleção</button>
+
+    <div>
+        <h2>Elementos check</h2>
+        <p>Quais sua prioridades?</p>
+        <p>
+            Trabalho <input type="checkbox" name="work" value="work" id="w">
+        </p>
+        <p>
+            Estudos <input type="checkbox" name="study" value="study" id="s">
+        </p>
+        <p> Saúde <input type="checkbox" name="healt" value="health" id="h">
+        </p>
+        <p>
+            <button onclick="getCheckBox()">Enviar</button>
+        </p>
+        <p>Minhas prioridades são <span id="pri">...</span></p>
+    </div>   
+
+    <!-- Sempre ao final da pagina para evitar erros de carregamento-->
+    <script scr="js/script2.js"></script>
+</body>
+</html>
