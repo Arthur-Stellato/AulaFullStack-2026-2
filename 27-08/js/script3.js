@@ -35,3 +35,20 @@ function resultado() {
 
 
 };
+
+function filtrarTeclas(event) {
+    // Permite teclas de comando do teclado
+    const teclasPermitidas = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+
+    // Permite ponto ou vírgula para decimais
+    const caracteresDecimais = ['.', ','];
+
+    if (teclasPermitidas.includes(event.key) || caracteresDecimais.includes(event.key)) {
+        return; // Libera a tecla
+    }
+
+    // Se não for um número de 0 a 9, bloqueia a digitação
+    if (!/[0-9]/.test(event.key)) {
+        event.preventDefault();
+    }
+};
