@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<div class="bg-primary text-white text-center py-4 mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <p class="text-center text-muted mb-4">
+                        Preencha as notas.
+                    </p>
+                    <form action="get" onsubmit="event.preventDefault();">
+                        <!--Primeira nota-->
+                        <div class="mb-3">
+                            <label for="nota" class="form-label fw-bold">Primeira nota</label>
+                            <input type="text" id="nota" name="nota" class="notas" placeholder="Digite a nota"
+                                oninput="media()">
+                        </div>
+                        <!--Segunda nota-->
+                        <div class="mb-3">
+                            <label for="nota" class="form-label fw-bold">Segunda nota</label>
+                            <input type="text" id="nota" name="nota" class="notas" placeholder="Digite a nota"
+                                oninput="media()">
+                        </div>
+                        <!--Terceira nota-->
+                        <div class="mb-3">
+                            <label for="nota" class="form-label fw-bold">Terceira nota</label>
+                            <input type="text" id="nota" name="nota" class="notas" placeholder="Digite a nota"
+                                oninput="media()">
+                        </div>
+                        <!--Quarta nota-->
+                        <div class="mb-3">
+                            <label for="nota" class="form-label fw-bold">Quarta nota</label>
+                            <input type="text" id="nota" name="nota" class="notas" placeholder="Digite a nota"
+                                oninput="media()">
+
+                        </div>
+                        <p>A média da sua nota é: <span id="result">??</span></p>
+                        <p>
+                            <button onclick="resultado()">Ver resultado</button>
+                        </p>
+                        <p><span id="rst"> </span></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<body>
+    <script src="js/script3.js"></script>
+</body>
+
+
+</html>
