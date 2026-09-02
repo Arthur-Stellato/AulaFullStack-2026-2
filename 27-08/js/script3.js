@@ -1,4 +1,6 @@
 var mediaFinal = 0;
+var nomeAluno = "";
+var notasAluno = [];
 
 function media() {
 
@@ -17,22 +19,43 @@ function media() {
 
 };
 
-function resultado() {
+function resultado(event) {
 
-    const rst = document.getElementById("rst");
+    event.preventDefault();
 
-    if (mediaFinal > 2 && mediaFinal < 6) {
-        rst.innerHTML = "ENXAME";
-        rst.style.color = "orange";
+    nomeAluno = document.getElementById("nomeAluno").value.trim();
+    const camposNota = document.querySelectorAll('.notas');
+    notasAluno = Array.from(camposNota, campo => Number(campo.value));
+
+    if (!nomeAluno || notasAluno.some(nota => Number.isNaN(nota))) {
+        document.getElementById("rst").innerHTML = "Preencha o nome e todas as notas.";
+        return;
     }
-    else if (mediaFinal >= 6) {
-        rst.innerHTML = "APROVADO";
-        rst.style.color = "green";
+
+    mediaFinal = notasAluno.reduce((soma, nota) => soma + nota, 0) / notasAluno.length;
+
+    let situacao;
+
+    if (mediaFinal > 6) {
+        situacao = "APROVADO";
+    } else if (mediaFinal >= 2 && mediaFinal < 6) {
+        situacao = "EXAME";
     } else {
-        rst.innerHTML = "REPROVADO";
-        rst.style.color = "red";
+        situacao = "REPROVADO";
     }
 
+    const aluno = {
+        nome: nomeAluno,
+        notas: notasAluno,
+        media: mediaFinal,
+        situacao: situacao
+    };
+
+    const alunosRegistrados = JSON.parse(localStorage.getItem("alunosRegistrados")) || [];
+    alunosRegistrados.push(aluno);
+    localStorage.setItem("alunosRegistrados", JSON.stringify(alunosRegistrados));
+
+    window.location.href = "resultado.html";
 
 };
 
